@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<a href="input.php">Click to Add a New View Viewing Activity</a>
+<a href="input.php">Click to Add a New Viewing Activity</a>
 
 <h1>Netflix Viewing Activity</h1>
 
@@ -27,6 +27,7 @@ $my_nf = $cmd->fetchAll();
 echo '<table class="table table-striped table-hover"><thead><th>Title</th><th>Date</th><th>Genre</th><th>Rating</th><th>Comment</th></thead>';
 
 // loop through the data & show each restaurant on a new row
+// date format: mm dd, yyyy
 foreach ($my_nf as $m)
 {
     echo '<tr><td>' . $m['title'] .

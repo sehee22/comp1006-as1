@@ -108,6 +108,7 @@
         $db = null;
         ?>
     </fieldset>
+
     <fieldset>
         <label for="genre" class="col-md-1">Genre: </label>
         <?php
