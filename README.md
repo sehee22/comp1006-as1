@@ -1,7 +1,11 @@
 <h1> Netflix Viewing Activity </h1>
-<p> Input Page: http://aws.computerstudi.es/~gc200389459/assginment1/input.php
+<p> Make your own Newflix Viewing Activity!
+<br><br>
+Input what you watched, and give the rating/comment
 <br>
-<a href = "http://aws.computerstudi.es/~gc200389459/assginment1/input.php"> Go to the Input page </a> </p>
-<p> List Page: http://aws.computerstudi.es/~gc200389459/assginment1/list.php
+- Title, Date, Genre, Rating is required (Comment is optional)
 <br>
-<a href = "http://aws.computerstudi.es/~gc200389459/assginment1/list.php"> Go to the list page </a> </p>
+- The date cannot be the future than now
+</p>
+<p> Input Page: <a href = "http://aws.computerstudi.es/~gc200389459/assginment1/input.php"> http://aws.computerstudi.es/~gc200389459/assginment1/input.php </a> 
+<br> List Page: <a href = "http://aws.computerstudi.es/~gc200389459/assginment1/list.php"> http://aws.computerstudi.es/~gc200389459/assginment1/list.php </a> </p>
