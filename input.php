@@ -10,6 +10,7 @@
 <a href="list.php">Click to see the list of Viewing Activity</a>
 
 <h1>Input a New Viewing Activity</h1>
+<p>You can add the same program repeatedly</p>
 
 <form action="save.php" method="post">
     <fieldset>
