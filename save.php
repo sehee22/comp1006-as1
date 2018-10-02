@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Save Viewing Activity</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
 </head>
 <body>
 
@@ -105,10 +106,9 @@ if ($ok == true)
 
     // echo only when the $ok value is true
     echo "<h2>Saved Successfully</h2>";
-    echo '<a href="list.php" style="text-decoration:none">Click to see the list of Viewing Activity</a>';
+    echo '<a href="list.php">Click to see the list of Viewing Activity</a>';
 }
-
-
 ?>
+
 </body>
 </html>

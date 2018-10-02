@@ -9,7 +9,7 @@
 
 <a href="input.php">Click to Add a New View Viewing Activity</a>
 
-<h1>Viewing Activity</h1>
+<h1>Netflix Viewing Activity</h1>
 
 <?php
 // connect

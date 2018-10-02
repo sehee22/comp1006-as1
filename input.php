@@ -9,7 +9,7 @@
 
 <a href="list.php">Click to see the list of Viewing Activity</a>
 
-<h2>Input a New Viewing Activity</h2>
+<h1>Input a New Viewing Activity</h1>
 
 <form action="save.php" method="post">
     <fieldset>
