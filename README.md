@@ -6,6 +6,8 @@ Input what you watched, and give the rating/comment
 - Title, Date, Genre, Rating is required (Comment is optional)
 <br>
 - The date cannot be the future than now
+<br>
+- Only validate date accepted (i.e. February 31 is not allowing)
 </p>
 <p> 
 Input Page: <a href="http://aws.computerstudi.es/~gc200389459/assginment1/input.php" target="_blank"> http://aws.computerstudi.es/~gc200389459/assginment1/input.php </a> 

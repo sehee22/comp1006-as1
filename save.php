@@ -73,11 +73,19 @@ switch ($mm)
 $today = date("Ymd");
 $dt = $yy . "" . $mm_num . "" . $dd;
 
-// compare
+// compare the date vs. now
 if ($today < date('Ymd', strtotime($dt)))
 {
     echo "<h2>Save Failed</h2>";
     echo "The date cannot be future than now (Input date: " . $mm . " " . $dd . ", " . $yy . ").";
+    $ok = false; // dose not save the data
+}
+
+// date validation
+if (!(checkdate($mm_num,$dd,$yy)))
+{
+    echo "<h2>Save Failed</h2>";
+    echo "Check the date (Input date: " . $mm . " " . $dd . ", " . $yy . ").";
     $ok = false; // dose not save the data
 }
 
