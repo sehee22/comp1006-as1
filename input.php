@@ -137,7 +137,7 @@
         ?>
     </fieldset>
     <fieldset>
-        <label for="rating" class="col-md-1">Rating: </label>
+        <label for="genre" class="col-md-1">Rating: </label>
         <?php
         // connect
         $db = new PDO ('mysql:host=aws.computerstudi.es;dbname=gc200389459', 'gc200389459', '-Z69zNNigW');

@@ -32,14 +32,13 @@ if ($ok)
     // PDO : PHP Database Object (regardless the database, we can use any type database system
     $db = new PDO ('mysql:host=aws.computerstudi.es;dbname=gc200389459', 'gc200389459', '-Z69zNNigW');
 
-
 // fetch the data from the db
     $sql = "SELECT * FROM my_nf_view_act";
     $cmd = $db->prepare($sql);
     $cmd->execute();
     $restaurants = $cmd->fetchAll();
     // set up and execute an INSERT command
-    $sql = "INSERT INTO my_nf_view_act (title, dd, mm, yy, genre, rating, cmnt) VALUES (:title, :dd, :mm, :yy, :genre, :rating, :cmnt)";
+    $sql = "INSERT INTO my_nf_view_act (title, mm, dd, yy, genre, rating, cmnt) VALUES (:title, :mm, :dd, :yy, :genre, :rating, :cmnt)";
     $cmd = $db->prepare($sql);
     $cmd->bindParam(':title', $title, PDO::PARAM_STR, 100);
     $cmd->bindParam(':mm', $mm, PDO::PARAM_STR, 9);
@@ -48,6 +47,7 @@ if ($ok)
     $cmd->bindParam(':genre', $genre, PDO::PARAM_STR, 20);
     $cmd->bindParam(':rating', $rating, PDO::PARAM_STR, 5);
     $cmd->bindParam(':cmnt', $cmnt, PDO::PARAM_STR, 500);
+
     $cmd->execute();
 
     // disconnect!!! after inserting, disconnect from the database
