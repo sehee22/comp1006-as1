@@ -25,9 +25,65 @@ if (empty($title))
     $ok = false;
 }
 
+// to compare [the input date] to [current date]
+// if [the input date] > [current date] => echo message, does not save the data
+
+// to make easy to compare, replace from the full name of the month to a number (string type)
+switch ($mm)
+{
+    case "January":
+        $mm_num = "01";
+        break;
+    case "February":
+        $mm_num = "02";
+        break;
+    case "March":
+        $mm_num = "03";
+        break;
+    case "April":
+        $mm_num = "04";
+        break;
+    case "May":
+        $mm_num = "05";
+        break;
+    case "June":
+        $mm_num = "06";
+        break;
+    case "July":
+        $mm_num = "07";
+        break;
+    case "August":
+        $mm_num = "08";
+        break;
+    case "September":
+        $mm_num = "09";
+        break;
+    case "October":
+        $mm_num = "10";
+        break;
+    case "November":
+        $mm_num = "11";
+        break;
+    case "December":
+        $mm_num = "12";
+        break;
+}
+
+$today = date("Ymd");
+$dt = $yy . "" . $mm_num . "" . $dd;
+
+// compare
+if ($today < date('Ymd', strtotime($dt)))
+{
+    echo "The date cannot be future than now.";
+    echo "<br />";
+    echo "Please go back to the previous page by clicking [<-] button on a web browser";
+    $ok = false; // dose not save the data
+}
+
 // connect to the database with server, username, password, dbname
 // only save if no validation errors
-if ($ok)
+if ($ok == true)
 {
     // PDO : PHP Database Object (regardless the database, we can use any type database system
     $db = new PDO ('mysql:host=aws.computerstudi.es;dbname=gc200389459', 'gc200389459', '-Z69zNNigW');
@@ -52,8 +108,12 @@ if ($ok)
 
     // disconnect!!! after inserting, disconnect from the database
     $db = null;
+
+    // echo only when the $ok value is true
+    echo "Viewing Activity Saved";
 }
-echo "Viewing Activity Saved";
+
+
 ?>
 </body>
 </html>

@@ -13,6 +13,7 @@
 
 <form action="save.php" method="post">
     <fieldset>
+        <!-- assume that viewers can watch the same program (movie) many times -->
         <label for ="title" class="col-md-1">Title: </label>
         <input name="title" id="title" required/>
     </fieldset>
