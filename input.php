@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<a href="list.php"  target="_blank">Click to see the list of Viewing Activity</a>
+<a href="list.php">Click to see the list of Viewing Activity</a>
 
 <h1>Input a New Viewing Activity</h1>
 
