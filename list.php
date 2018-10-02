@@ -7,6 +7,8 @@
 </head>
 <body>
 
+<a href="input.php">Click to Add a New View Viewing Activity</a>
+
 <h1>Viewing Activity</h1>
 
 <?php
@@ -19,22 +21,19 @@ $sql = "SELECT * FROM my_nf_view_act";
 // execute & store the result
 $cmd = $db->prepare($sql);
 $cmd->execute();
-$restaurants = $cmd->fetchAll(); // fetch는 하나씩만 부르는데, fetchall은 모두 부름. 레스토랑 이름이 여러개이니가 fetchall을 사용
+$my_nf = $cmd->fetchAll();
 
 // start the table
-echo '<table class="table table-striped table-hover"><thead><th>Title</th><th>Month</th><th>Day</th><th>Year</th><th>Genre</th><th>Rating</th><th>Comment</th></thead>';
+echo '<table class="table table-striped table-hover"><thead><th>Title</th><th>Date</th><th>Genre</th><th>Rating</th><th>Comment</th></thead>';
 
 // loop through the data & show each restaurant on a new row
-// . 으로 연결을 열고 닫고 함
-foreach ($restaurants as $r)
+foreach ($my_nf as $m)
 {
-    echo '<tr><td>' . $r['title'] .
-        '</td><td>' . $r['mm'] .
-        '</td><td>' . $r['dd'] .
-        '</td><td>' . $r['yy'] .
-        '</td><td>' . $r['genre'] .
-        '</td><td>' . $r['rating'] .
-        '</td><td>' . $r['cmnt'] . '</td></tr>';
+    echo '<tr><td>' . $m['title'] .
+        '</td><td>' . $m['mm'] . " " . $m['dd'] . ", " . $m['yy'] .
+        '</td><td>' . $m['genre'] .
+        '</td><td>' . $m['rating'] .
+        '</td><td>' . $m['cmnt'] . '</td></tr>';
 }
 // close the table
 echo '</table>';

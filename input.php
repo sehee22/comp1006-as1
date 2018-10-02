@@ -7,9 +7,9 @@
 </head>
 <body>
 
-<a href="list.php">View Viewing Activity</a>
+<a href="list.php">Click to see the list of Viewing Activity</a>
 
-<h1>Input a New Viewing Activity</h1>
+<h2>Input a New Viewing Activity</h2>
 
 <form action="save.php" method="post">
     <fieldset>

@@ -75,9 +75,8 @@ $dt = $yy . "" . $mm_num . "" . $dd;
 // compare
 if ($today < date('Ymd', strtotime($dt)))
 {
-    echo "The date cannot be future than now.";
-    echo "<br />";
-    echo "Please go back to the previous page by clicking [<-] button on a web browser";
+    echo "<h2>Save Failed</h2>";
+    echo "The date cannot be future than now (Input date: " . $mm . " " . $dd . ", " . $yy . ").";
     $ok = false; // dose not save the data
 }
 
@@ -88,11 +87,6 @@ if ($ok == true)
     // PDO : PHP Database Object (regardless the database, we can use any type database system
     $db = new PDO ('mysql:host=aws.computerstudi.es;dbname=gc200389459', 'gc200389459', '-Z69zNNigW');
 
-// fetch the data from the db
-    $sql = "SELECT * FROM my_nf_view_act";
-    $cmd = $db->prepare($sql);
-    $cmd->execute();
-    $restaurants = $cmd->fetchAll();
     // set up and execute an INSERT command
     $sql = "INSERT INTO my_nf_view_act (title, mm, dd, yy, genre, rating, cmnt) VALUES (:title, :mm, :dd, :yy, :genre, :rating, :cmnt)";
     $cmd = $db->prepare($sql);
@@ -110,7 +104,8 @@ if ($ok == true)
     $db = null;
 
     // echo only when the $ok value is true
-    echo "Viewing Activity Saved";
+    echo "<h2>Saved Successfully</h2>";
+    echo '<a href="list.php" style="text-decoration:none">Click to see the list of Viewing Activity</a>';
 }
 
 
