@@ -16,7 +16,7 @@
 $db = new PDO ('mysql:host=aws.computerstudi.es;dbname=gc200389459', 'gc200389459', '-Z69zNNigW');
 
 // set up query
-$sql = "SELECT * FROM my_nf_view_act";
+$sql = "SELECT * FROM nf_my_view_act";
 
 // execute & store the result
 $cmd = $db->prepare($sql);

@@ -97,7 +97,7 @@ if ($ok == true)
     $db = new PDO ('mysql:host=aws.computerstudi.es;dbname=gc200389459', 'gc200389459', '-Z69zNNigW');
 
     // set up and execute an INSERT command
-    $sql = "INSERT INTO my_nf_view_act (title, mm, dd, yy, genre, rating, cmnt) VALUES (:title, :mm, :dd, :yy, :genre, :rating, :cmnt)";
+    $sql = "INSERT INTO nf_my_view_act (title, mm, dd, yy, genre, rating, cmnt) VALUES (:title, :mm, :dd, :yy, :genre, :rating, :cmnt)";
     $cmd = $db->prepare($sql);
     $cmd->bindParam(':title', $title, PDO::PARAM_STR, 100);
     $cmd->bindParam(':mm', $mm, PDO::PARAM_STR, 9);
