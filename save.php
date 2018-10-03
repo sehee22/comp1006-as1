@@ -91,7 +91,7 @@ if (!(checkdate($mm_num,$dd,$yy)))
 
 // connect to the database with server, username, password, dbname
 // only save if no validation errors
-if ($ok == true)
+if ($ok)
 {
     // PDO : PHP Database Object (regardless the database, we can use any type database system
     $db = new PDO ('mysql:host=aws.computerstudi.es;dbname=gc200389459', 'gc200389459', '-Z69zNNigW');
