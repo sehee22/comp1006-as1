@@ -1,5 +1,5 @@
 <?php
-$b_title = "Save Netflix Viewing Activity";
+$b_title = "Save Activity";
 require('header.php');
 require('auth.php');
 
@@ -12,7 +12,7 @@ $genre = $_POST ['genre'];
 $rating = $_POST ['rating'];
 $cmnt = $_POST ['cmnt'];
 $ord = $_POST['ord'];
-$poster = $_POST['poster'];;
+$poster = $_POST['poster'];
 
 
 // validate each input
@@ -116,45 +116,50 @@ if (isset($_FILES['poster']['name']))
     }
 
 }
+
 // connect to the database with server, username, password, dbname
 // only save if no validation errors
 if ($ok)
 {
-    // db connect
-    require('db.php');
+    try {
+        // db connect
+        require('db.php');
 
-    if (empty($ord))
-    {
-        $sql = "INSERT INTO nf_my_view_act (title, mm, dd, yy, genre, rating, cmnt, poster) VALUES (:title, :mm, :dd, :yy, :genre, :rating, :cmnt, :poster)";
+        if (empty($ord)) {
+            $sql = "INSERT INTO nf_my_view_act (title, mm, dd, yy, genre, rating, cmnt, poster) VALUES (:title, :mm, :dd, :yy, :genre, :rating, :cmnt, :poster)";
+        } else {
+            $sql = "UPDATE nf_my_view_act SET title = :title, mm = :mm, dd = :dd, yy = :yy, genre = :genre, rating = :rating, cmnt = :cmnt, poster = :poster WHERE ord = :ord";
+        }
+
+        $cmd = $db->prepare($sql);
+        $cmd->bindParam(':title', $title, PDO::PARAM_STR, 100);
+        $cmd->bindParam(':mm', $mm, PDO::PARAM_STR, 9);
+        $cmd->bindParam(':dd', $dd, PDO::PARAM_STR, 2);
+        $cmd->bindParam(':yy', $yy, PDO::PARAM_STR, 4);
+        $cmd->bindParam(':genre', $genre, PDO::PARAM_STR, 20);
+        $cmd->bindParam(':rating', $rating, PDO::PARAM_STR, 5);
+        $cmd->bindParam(':cmnt', $cmnt, PDO::PARAM_STR, 500);
+        $cmd->bindParam(':poster', $poster, PDO::PARAM_STR, 100);
+
+        if (!empty($ord)) {
+            $cmd->bindParam('ord', $ord, PDO::PARAM_INT);
+        }
+
+        $cmd->execute();
+
+        // disconnect!!! after inserting, disconnect from the database
+        $db = null;
+
+        // redirect
+        header('location:list.php');
     }
-    else
+    catch (Exception $e)
     {
-        $sql = "UPDATE nf_my_view_act SET title = :title, mm = :mm, dd = :dd, yy = :yy, genre = :genre, rating = :rating, cmnt = :cmnt, poster = :poster WHERE ord = :ord";
+        // send
+        mail('200389459@student.georgianc.on.ca', 'Netflix page Error: ' . $b_title , $e);
+        // show generic error page
+        header('location:error.php');
     }
-
-    $cmd = $db->prepare($sql);
-    $cmd->bindParam(':title', $title, PDO::PARAM_STR, 100);
-    $cmd->bindParam(':mm', $mm, PDO::PARAM_STR, 9);
-    $cmd->bindParam(':dd', $dd, PDO::PARAM_STR, 2);
-    $cmd->bindParam(':yy', $yy, PDO::PARAM_STR, 4);
-    $cmd->bindParam(':genre', $genre, PDO::PARAM_STR, 20);
-    $cmd->bindParam(':rating', $rating, PDO::PARAM_STR, 5);
-    $cmd->bindParam(':cmnt', $cmnt, PDO::PARAM_STR, 500);
-    $cmd->bindParam(':poster', $poster, PDO::PARAM_STR, 100);
-
-    if (!empty($ord))
-    {
-        $cmd->bindParam('ord', $ord, PDO::PARAM_INT);
-    }
-
-    $cmd->execute();
-
-    // disconnect!!! after inserting, disconnect from the database
-    $db = null;
-
-
-    // redirect
-    header('location:list.php');
 }
 ?>
 

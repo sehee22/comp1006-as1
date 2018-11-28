@@ -59,225 +59,225 @@ catch (Exception $e)
 }
 ?>
 
-
-<h1>Viewing Activity Detail</h1>
-<p>You can add the same program repeatedly</p>
-
 <!--  enctype="multipart/form-data: add the ability to upload an image -->
 <form action="save.php" method="post" enctype="multipart/form-data">
-<fieldset>
-<!-- assume that viewers can watch the same program (movie) many times -->
-        <label for="title" class="col-md-1">Title: </label>
-        <input name="title" id="title" required value="<?php echo $title; ?>" />
-    </fieldset>
-    <fieldset>
-        <label for="mm" class="col-md-1">Date: </label>
-        <?php
-        // connect
-        require ('db.php');
+    <!--  start the container -->
+    <main class = "container">
+    <div class ="jumbotron" style="background-color: #e3f2fd;">
+        <fieldset>
+        <!-- assume that viewers can watch the same program (movie) many times -->
+                <label for="title" class="col-md-1">Title: </label>
+                <input name="title" id="title" required value="<?php echo $title; ?>" />
+            </fieldset>
+            <fieldset>
+                <label for="mm" class="col-md-1">Date: </label>
+                <?php
+                // connect
+                require ('db.php');
 
-        // set up query
-        $sql = "select mm from nf_mm order by ord";
-        $cmd = $db->prepare($sql);
+                // set up query
+                $sql = "select mm from nf_mm order by ord";
+                $cmd = $db->prepare($sql);
 
-        // fetch the results
-        $cmd->execute();
-        $month = $cmd->fetchAll();
+                // fetch the results
+                $cmd->execute();
+                $month = $cmd->fetchAll();
 
-        // start the select
-        echo '<select name = "mm">';
+                // start the select
+                echo '<select name = "mm">';
 
-        // loop through and create a new option tag for each type
-        foreach ($month as $m)
-        {
-            if ($m['mm'] == $mm)
-            {
-                echo '<option selected>' . $m[mm] . '</option>';
-            }
-            else
-            {
-                echo '<option>' . $m[mm] . '</option>';
-            }
-        }
+                // loop through and create a new option tag for each type
+                foreach ($month as $m)
+                {
+                    if ($m['mm'] == $mm)
+                    {
+                        echo '<option selected>' . $m[mm] . '</option>';
+                    }
+                    else
+                    {
+                        echo '<option>' . $m[mm] . '</option>';
+                    }
+                }
 
-        // close the select
-        echo '</select>';
+                // close the select
+                echo '</select>';
 
-        // disconnect
-        $db = null;
-        ?>
-    </fieldset>
-    <fieldset>
-        <label for="dd" class="col-md-1"></label>
-        <?php
-        // connect
-        require ('db.php');
+                // disconnect
+                $db = null;
+                ?>
+            </fieldset>
+            <fieldset>
+                <label for="dd" class="col-md-1"></label>
+                <?php
+                // connect
+                require ('db.php');
 
-        // set up query
-        $sql = "select dd from nf_dd";
-        $cmd = $db->prepare($sql);
+                // set up query
+                $sql = "select dd from nf_dd";
+                $cmd = $db->prepare($sql);
 
-        // fetch the results
-        $cmd->execute();
-        $day = $cmd->fetchAll();
+                // fetch the results
+                $cmd->execute();
+                $day = $cmd->fetchAll();
 
-        // start the select
-        echo '<select name = "dd">';
+                // start the select
+                echo '<select name = "dd">';
 
-        // loop through and create a new option tag for each type
-        foreach ($day as $d)
-        {
-            if ($d['dd'] == $dd)
-            {
-                echo '<option selected>' . $d[dd] . '</option>';
-            }
-            else
-            {
-                echo '<option>' . $d[dd] . '</option>';
-            }
-        }
+                // loop through and create a new option tag for each type
+                foreach ($day as $d)
+                {
+                    if ($d['dd'] == $dd)
+                    {
+                        echo '<option selected>' . $d[dd] . '</option>';
+                    }
+                    else
+                    {
+                        echo '<option>' . $d[dd] . '</option>';
+                    }
+                }
 
-        // close the select
-        echo '</select>';
+                // close the select
+                echo '</select>';
 
-        // disconnect
-        $db = null;
-        ?>
-    </fieldset>
-    <fieldset>
-        <label for="yy" class="col-md-1"></label>
-        <?php
-        // connect
-        require ('db.php');
+                // disconnect
+                $db = null;
+                ?>
+            </fieldset>
+            <fieldset>
+                <label for="yy" class="col-md-1"></label>
+                <?php
+                // connect
+                require ('db.php');
 
-        // set up query
-        $sql = "select yy from nf_yy order by ord desc";
-        $cmd = $db->prepare($sql);
+                // set up query
+                $sql = "select yy from nf_yy order by ord desc";
+                $cmd = $db->prepare($sql);
 
-        // fetch the results
-        $cmd->execute();
-        $year = $cmd->fetchAll();
+                // fetch the results
+                $cmd->execute();
+                $year = $cmd->fetchAll();
 
-        // start the select
-        echo '<select name = "yy">';
+                // start the select
+                echo '<select name = "yy">';
 
-        // loop through and create a new option tag for each type
-        foreach ($year as $y)
-        {
-            if($r['yy'] == $yy)
-            {
-                echo '<option selected>' . $y[yy] . '</option>';
-            }
-            else
-            {
-                echo '<option>' . $y[yy] . '</option>';
-            }
-        }
+                // loop through and create a new option tag for each type
+                foreach ($year as $y)
+                {
+                    if($r['yy'] == $yy)
+                    {
+                        echo '<option selected>' . $y[yy] . '</option>';
+                    }
+                    else
+                    {
+                        echo '<option>' . $y[yy] . '</option>';
+                    }
+                }
 
-        // close the select
-        echo '</select>';
+                // close the select
+                echo '</select>';
 
-        // disconnect
-        $db = null;
-        ?>
-    </fieldset>
+                // disconnect
+                $db = null;
+                ?>
+            </fieldset>
 
-    <fieldset>
-        <label for="genre" class="col-md-1">Genre: </label>
-        <?php
-        // connect
-        require ('db.php');
+            <fieldset>
+                <label for="genre" class="col-md-1">Genre: </label>
+                <?php
+                // connect
+                require ('db.php');
 
-        // set up query
-        $sql = "select genre from nf_genre order by genre";
-        $cmd = $db->prepare($sql);
+                // set up query
+                $sql = "select genre from nf_genre order by genre";
+                $cmd = $db->prepare($sql);
 
-        // fetch the results
-        $cmd->execute();
-        $genre_d = $cmd->fetchAll();
+                // fetch the results
+                $cmd->execute();
+                $genre_d = $cmd->fetchAll();
 
-        // start the select
-        echo '<select name = "genre">';
+                // start the select
+                echo '<select name = "genre">';
 
-        // loop through and create a new option tag for each type
-        foreach ($genre_d as $g)
-        {
-            if($g['genre'] == $genre)
-            {
-                echo '<option selected>' . $g[genre] . '</option>';
-            }
-            else
-            {
-                echo '<option>' . $g[genre] . '</option>';
-            }
-        }
+                // loop through and create a new option tag for each type
+                foreach ($genre_d as $g)
+                {
+                    if($g['genre'] == $genre)
+                    {
+                        echo '<option selected>' . $g[genre] . '</option>';
+                    }
+                    else
+                    {
+                        echo '<option>' . $g[genre] . '</option>';
+                    }
+                }
 
-        // close the select
-        echo '</select>';
+                // close the select
+                echo '</select>';
 
-        // disconnect
-        $db = null;
-        ?>
-    </fieldset>
+                // disconnect
+                $db = null;
+                ?>
+            </fieldset>
 
-    <fieldset>
-        <label for="rating" class="col-md-1">Rating: </label>
-        <?php
-        // connect
-        require ('db.php');
+            <fieldset>
+                <label for="rating" class="col-md-1">Rating: </label>
+                <?php
+                // connect
+                require ('db.php');
 
-        // set up query
-        $sql = "select rating from nf_rating order by ord desc";
-        $cmd = $db->prepare($sql);
+                // set up query
+                $sql = "select rating from nf_rating order by ord desc";
+                $cmd = $db->prepare($sql);
 
-        // fetch the results
-        $cmd->execute();
-        $rating_d = $cmd->fetchAll();
+                // fetch the results
+                $cmd->execute();
+                $rating_d = $cmd->fetchAll();
 
-        // start the select
-        echo '<select name = "rating">';
+                // start the select
+                echo '<select name = "rating">';
 
-        // loop through and create a new option tag for each type
-        foreach ($rating_d as $r)
-        {
-            if($r['rating'] == $rating)
-            {
-                echo '<option selected>' . $r[rating] . '</option>';
-            }
-            else
-            {
-                echo '<option>' . $r[rating] . '</option>';
-            }
-        }
+                // loop through and create a new option tag for each type
+                foreach ($rating_d as $r)
+                {
+                    if($r['rating'] == $rating)
+                    {
+                        echo '<option selected>' . $r[rating] . '</option>';
+                    }
+                    else
+                    {
+                        echo '<option>' . $r[rating] . '</option>';
+                    }
+                }
 
-        // close the select
-        echo '</select>';
+                // close the select
+                echo '</select>';
 
-        // disconnect
-        $db = null;
-        ?>
-    </fieldset>
+                // disconnect
+                $db = null;
+                ?>
+            </fieldset>
 
-    <fieldset>
-        <label for="poster" class="col-md-1">Poster:</label>
-        <input type="file" name="poster" id="poster" />
-    </fieldset>
-    <div class="col-md-offset-1">
-        <?php
-        if (isset($poster))
-        {
-            echo "<img src=\"img/$poster\" alt=\"Poster\" />";
-        }
-        ?>
+            <fieldset>
+                <label for="poster" class="col-md-1">Poster:</label>
+                <input type="file" name="poster" id="poster" />
+            </fieldset>
+            <div class="col-md-offset-1">
+                <?php
+                if (!empty($poster))
+                {
+                    echo "<img src=\"img/$poster\" alt=\"Poster\" />";
+                }
+                ?>
+            </div>
+
+            <fieldset>
+                <label for ="cmnt" class="col-md-1">Comment: </label>
+                <textarea name="cmnt" id="cmnt"><?php echo $cmnt; ?></textarea>
+            </fieldset>
+            <button class="col-md-offset-1 btn btn-primary">Save</button>
+            <input type="hidden" name ="ord" id="ord" value="<?php echo $ord ?>" />
+            <input type="hidden" name ="poster" id="poster" value="<?php echo $poster ?>" />
     </div>
-
-    <fieldset>
-        <label for ="cmnt" class="col-md-1">Comment: </label>
-        <textarea name="cmnt" id="cmnt"><?php echo $cmnt; ?></textarea>
-    </fieldset>
-    <button class="col-md-offset-1 btn btn-primary">Save</button>
-    <input type="hidden" name ="ord" id="ord" value="<?php echo $ord ?>" />
-    <input type="hidden" name ="poster" id="poster" value="<?php echo $poster ?>" />
 </form>
 </body>
 </html>

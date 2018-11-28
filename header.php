@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title><?php echo $b_title; ?></title>
     <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/main.css" type="text/css">
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 

@@ -29,25 +29,34 @@ if ($password != $confirm)
 
 if ($ok)
 {
-    // hash the password
-    $hashedpassword = password_hash($password, PASSWORD_DEFAULT);
+    try {
+        // hash the password
+        $hashedpassword = password_hash($password, PASSWORD_DEFAULT);
 
-    // connect
-    require('db.php');
+        // connect
+        require('db.php');
 
-    // set up and execute the insert
-    $sql = "INSERT INTO nf_users (username, password) VALUES(:username, :password);"; // [:username] -> parameter
-    // test@test.com / Test1234
-    $cmd = $db->prepare($sql);
-    $cmd ->bindParam(':username', $username, PDO::PARAM_STR, 50);
-    $cmd ->bindParam(':password', $hashedpassword, PDO::PARAM_STR, 255);
-    $cmd -> execute();
+        // set up and execute the insert
+        $sql = "INSERT INTO nf_users (username, password) VALUES(:username, :password);"; // [:username] -> parameter
+        // test@test.com / Test1234
+        $cmd = $db->prepare($sql);
+        $cmd->bindParam(':username', $username, PDO::PARAM_STR, 50);
+        $cmd->bindParam(':password', $hashedpassword, PDO::PARAM_STR, 255);
+        $cmd->execute();
 
-    // disconnect
-    $db = null;
+        // disconnect
+        $db = null;
 
-    // redirect to login
-    header('location:login.php');
+        // redirect to login
+        header('location:login.php');
+    }
+    catch (Exception $e)
+    {
+        // send
+        mail('200389459@student.georgianc.on.ca', 'Netflix page Error: ' . $b_title , $e);
+        // show generic error page
+        header('location:error.php');
+    }
 }
 ?>
 </body>

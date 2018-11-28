@@ -2,11 +2,6 @@
 $b_title = "Viewing Activity";
 require('header.php');
 
-?>
-
-<h1>Netflix Viewing Activity</h1>
-
-<?php
 try
 {
     // connect
@@ -20,8 +15,11 @@ try
     $cmd->execute();
     $my_nf = $cmd->fetchAll();
 
+    // start the container
+    echo '<main class = "container">';
+    echo '<div class ="jumbotron" style="background-color: #e3f2fd; background-size: 100%;">';
     // start the table
-    echo '<table class="table table-striped table-hover"><thead><th>Title</th><th></th><th>Date</th><th>Genre</th><th>Rating</th><th>Comment</th>';
+    echo '<table class="table table-hover sortable table-responsive" "><thead class="bg-success"><th>Title</th><th></th><th>Date</th><th>Genre</th><th>Rating</th><th>Comment</th>';
 
     // only member can see this part
     if (isset($_SESSION['userId'])) {
@@ -35,9 +33,9 @@ try
     foreach ($my_nf as $m) {
         echo "<tr><td> {$m['title']} </td>";
 
-        if (isset($m['poster']))
+        if (!empty($m['poster']))
         {
-            echo "<td><img src=\"img/{$m['poster']}\" alt=\"Poster\" height=\"50px\" /></td>";
+            echo "<td><img src=\"img/{$m['poster']}\" alt=\"Poster\" height=\"50px\" /> </td>";
         }
         else
         {
@@ -50,14 +48,17 @@ try
 
         // only member can see this part
         if (isset($_SESSION['userId'])) {
-            echo "<td><a href=\"input.php?ord={$m['ord']}\">Edit</a> | <a href=\"delete.php?ord={$m['ord']} \" 
-                             class=\"text-danger confirmation\">Delete</a> </td>";
+            echo "<td><a href=\"input.php?ord={$m['ord']}\"> Edit </a> 
+                      <a href=\"delete.php?ord={$m['ord']} \" class=\"text-danger confirmation\">Delete</a></td>";
         }
 
         echo '</tr>';
     }
     // close the table
     echo '</table>';
+
+    echo '</div>';
+    echo '</main>';
 
     // disconnect
     $db = null;
