@@ -2,10 +2,11 @@
 $b_title = "Viewing Activity Detail";
 require('header.php');
 
-require('auth.php');
-
 try
 {
+    require ('db.php');
+    require('auth.php');
+
     // initialize variables
     $title = null;
     $mm = null;
@@ -22,9 +23,6 @@ try
     {
         // assign the club_id
         $ord = $_GET['ord'];
-
-        // connect
-        require ('db.php');
 
         // set up query
         $sql = "SELECT * FROM nf_my_view_act WHERE ord = :ord";
@@ -278,6 +276,7 @@ catch (Exception $e)
             <input type="hidden" name ="ord" id="ord" value="<?php echo $ord ?>" />
             <input type="hidden" name ="poster" id="poster" value="<?php echo $poster ?>" />
     </div>
+    </main>
 </form>
 </body>
 </html>
