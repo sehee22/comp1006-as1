@@ -8,6 +8,11 @@ Input what you watched, and give the rating/comment
 - The date cannot be the future than now
 <br>
 - Only validate date accepted (i.e. February 31 is not allowed)
+<br>
+<b> - (NEW) Upload the poster! 
+<br>
+The page keeps the poster even after [EDIT->SAVE]
+</b>
 </p>
 <p>
 Visit Here: <a href="http://aws.computerstudi.es/~gc200389459/assignment1/default.php" target="_blank"> http://aws.computerstudi.es/~gc200389459/assignment1/default.php </a> 

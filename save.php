@@ -88,6 +88,7 @@ if (!(checkdate($mm_num,$dd,$yy)))
 }
 
 // check and validate logo upload
+// EDIT -> SAVE => the Poster keeps saved
 if (isset($_FILES['poster']['name']))
 {
     $posterFile = $_FILES['poster'];
