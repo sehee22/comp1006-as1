@@ -1,13 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Viewing Activity</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css" />
-</head>
-<body>
+<?php
+$title = "Viewing Activity";
+require('header.php');
 
-<a href="input.php">Click to Add a New Viewing Activity</a>
+?>
 
 <h1>Netflix Viewing Activity</h1>
 
@@ -24,7 +19,14 @@ $cmd->execute();
 $my_nf = $cmd->fetchAll();
 
 // start the table
-echo '<table class="table table-striped table-hover"><thead><th>Title</th><th>Date</th><th>Genre</th><th>Rating</th><th>Comment</th></thead>';
+echo '<table class="table table-striped table-hover"><thead><th>Title</th><th>Date</th><th>Genre</th><th>Rating</th><th>Comment</th>';
+
+// only member can see this part
+if (isset($_SESSION['userId'])) {
+    echo "<th>Action</th>";
+}
+
+echo '</thead>';
 
 // loop through the data & show each restaurant on a new row
 // date format: mm dd, yyyy
@@ -34,7 +36,15 @@ foreach ($my_nf as $m)
         '</td><td>' . $m['mm'] . " " . $m['dd'] . ", " . $m['yy'] .
         '</td><td>' . $m['genre'] .
         '</td><td>' . $m['rating'] .
-        '</td><td>' . $m['cmnt'] . '</td></tr>';
+        '</td><td>' . $m['cmnt'] . '</td>';
+
+    // only member can see this part
+    if (isset($_SESSION['userId'])) {
+        echo "<td><a href=\"input.php?ord={$m['ord']}\">Edit</a> | <a href=\"delete-viewing.php?ord={$m['ord']} \" 
+                         class=\"text-danger confirmation\">Delete</a> </td>";
+    }
+
+    echo '</tr>';
 }
 // close the table
 echo '</table>';
@@ -42,6 +52,11 @@ echo '</table>';
 // disconnect
 $db = null;
 ?>
+<!-- js -->
+<script src ="js/jquery-3.3.1.min.js"></script>
+<script src="js/scripts.js"></script>
+<!-- sorttable script from https://kryogenix.org/code/browser/sorttable/ -->
+<script src="js/sorttable.js"></script>
 
 </body>
 </html>

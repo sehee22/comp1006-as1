@@ -1,13 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Save Viewing Activity</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css"/>
-</head>
-<body>
-
 <?php
+require('header.php');
+require('auth.php');
+
 // introduce variables to store the form input variables
 $title = $_POST ['title'];
 $mm = $_POST ['mm'];
