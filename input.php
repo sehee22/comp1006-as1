@@ -1,12 +1,5 @@
 <?php
-if (!empty($_GET['ord']))
-{
-    $title = "Edit Viewing Activity";
-}
-else
-{
-    $title = "Input Viewing Activity";
-}
+$b_title = "Viewing Activity Detail";
 require('header.php');
 
 try
@@ -55,7 +48,7 @@ try
 catch (Exception $e)
 {
     // send
-    mail('200389459@student.georgianc.on.ca', 'Netflix page Error: ' . $title , $e);
+    mail('200389459@student.georgianc.on.ca', 'Netflix page Error: ' . $b_title , $e);
 
     // show generic error page
     header('location:error.php');
@@ -262,9 +255,10 @@ catch (Exception $e)
 
     <fieldset>
         <label for ="cmnt" class="col-md-1">Comment: </label>
-        <textarea name="cmnt" id="cmnt" required><?php echo $cmnt; ?></textarea>
+        <textarea name="cmnt" id="cmnt"><?php echo $cmnt; ?></textarea>
     </fieldset>
     <button class="col-md-offset-1 btn btn-primary">Save</button>
+    <input type="hidden" name ="ord", id="ord" value=<?php echo $ord ?>" />
 </form>
 </body>
 </html>

@@ -1,4 +1,5 @@
 <?php
+$b_title = "Save Netflix Viewing Activity";
 require('header.php');
 require('auth.php');
 
@@ -10,6 +11,7 @@ $yy = $_POST ['yy'];
 $genre = $_POST ['genre'];
 $rating = $_POST ['rating'];
 $cmnt = $_POST ['cmnt'];
+$ord = $_POST['ord'];
 
 // validate each input
 $ok = true;
@@ -87,11 +89,18 @@ if (!(checkdate($mm_num,$dd,$yy)))
 // only save if no validation errors
 if ($ok)
 {
-    // PDO : PHP Database Object (regardless the database, we can use any type database system
-    $db = new PDO ('mysql:host=aws.computerstudi.es;dbname=gc200389459', 'gc200389459', '-Z69zNNigW');
+    // db connect
+    require('db.php');
 
-    // set up and execute an INSERT command
-    $sql = "INSERT INTO nf_my_view_act (title, mm, dd, yy, genre, rating, cmnt) VALUES (:title, :mm, :dd, :yy, :genre, :rating, :cmnt)";
+    if (empty($ord))
+    {
+        $sql = "INSERT INTO nf_my_view_act (title, mm, dd, yy, genre, rating, cmnt) VALUES (:title, :mm, :dd, :yy, :genre, :rating, :cmnt)";
+    }
+    else
+    {
+        $sql = "UPDATE nf_my_view_act SET title = :title, mm = :mm, dd = :dd, yy = :yy, genre = :genre, rating = :rating, cmnt = :cmnt WHERE ord = :ord";
+    }
+
     $cmd = $db->prepare($sql);
     $cmd->bindParam(':title', $title, PDO::PARAM_STR, 100);
     $cmd->bindParam(':mm', $mm, PDO::PARAM_STR, 9);
@@ -101,14 +110,17 @@ if ($ok)
     $cmd->bindParam(':rating', $rating, PDO::PARAM_STR, 5);
     $cmd->bindParam(':cmnt', $cmnt, PDO::PARAM_STR, 500);
 
+    if (!empty($ord))
+    {
+        $cmd->bindParam('ord', $ord, PDO::PARAM_INT);
+    }
     $cmd->execute();
 
     // disconnect!!! after inserting, disconnect from the database
     $db = null;
 
-    // echo only when the $ok value is true
-    echo "<h2>Saved Successfully</h2>";
-    echo '<a href="list.php">Click to see the list of Viewing Activity</a>';
+    // redirect
+    header('location:list.php');
 }
 ?>
 

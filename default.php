@@ -1,5 +1,5 @@
 <?php
-$title = "Netflix Viewing Activity";
+$b_title = "Netflix Viewing Activity";
 require('header.php');
 ?>
 
