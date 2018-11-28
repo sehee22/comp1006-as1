@@ -42,10 +42,10 @@ try
         $rating = $my_nf['rating'];
         $cmnt = $my_nf['cmnt'];
         $poster = $my_nf['poster'];
-
-        // disconnect
-        $db = null;
     }
+
+    // disconnect
+    $db = null;
 }
 catch (Exception $e)
 {
