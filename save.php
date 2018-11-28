@@ -12,7 +12,7 @@ $genre = $_POST ['genre'];
 $rating = $_POST ['rating'];
 $cmnt = $_POST ['cmnt'];
 $ord = $_POST['ord'];
-$poster = $_POST['poster'];
+$poster = $_POST['poster'];;
 
 
 // validate each input

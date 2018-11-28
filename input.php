@@ -264,7 +264,8 @@ catch (Exception $e)
     </fieldset>
     <div class="col-md-offset-1">
         <?php
-        if (isset($poster)) {
+        if (isset($poster))
+        {
             echo "<img src=\"img/$poster\" alt=\"Poster\" />";
         }
         ?>
@@ -276,6 +277,7 @@ catch (Exception $e)
     </fieldset>
     <button class="col-md-offset-1 btn btn-primary">Save</button>
     <input type="hidden" name ="ord" id="ord" value="<?php echo $ord ?>" />
+    <input type="hidden" name ="poster" id="poster" value="<?php echo $poster ?>" />
 </form>
 </body>
 </html>
