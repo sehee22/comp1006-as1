@@ -10,7 +10,5 @@ Input what you watched, and give the rating/comment
 - Only validate date accepted (i.e. February 31 is not allowed)
 </p>
 <p>
-Input Page: <a href="http://aws.computerstudi.es/~gc200389459/assignment1/input.php" target="_blank"> http://aws.computerstudi.es/~gc200389459/assignment1/input.php </a> 
+Visit Here: <a href="http://aws.computerstudi.es/~gc200389459/assignment1/default.php" target="_blank"> http://aws.computerstudi.es/~gc200389459/assignment1/default.php </a> 
 <br> 
-List Page: <a href="http://aws.computerstudi.es/~gc200389459/assignment1/list.php" target="_blank"> http://aws.computerstudi.es/~gc200389459/assignment1/list.php </a> 
-</p>
