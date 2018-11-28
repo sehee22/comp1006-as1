@@ -13,7 +13,7 @@ try
     require('db.php');
 
     // set up query
-    $sql = "SELECT * FROM nf_my_view_act";
+    $sql = "SELECT * FROM nf_my_view_act ORDER BY ord DESC";
 
     // execute & store the result
     $cmd = $db->prepare($sql);
@@ -21,7 +21,7 @@ try
     $my_nf = $cmd->fetchAll();
 
     // start the table
-    echo '<table class="table table-striped table-hover"><thead><th>Title</th><th>Date</th><th>Genre</th><th>Rating</th><th>Comment</th>';
+    echo '<table class="table table-striped table-hover"><thead><th>Title</th><th></th><th>Date</th><th>Genre</th><th>Rating</th><th>Comment</th>';
 
     // only member can see this part
     if (isset($_SESSION['userId'])) {
@@ -33,8 +33,17 @@ try
     // loop through the data & show each restaurant on a new row
     // date format: mm dd, yyyy
     foreach ($my_nf as $m) {
-        echo '<tr><td>' . $m['title'] .
-            '</td><td>' . $m['mm'] . " " . $m['dd'] . ", " . $m['yy'] .
+        echo "<tr><td> {$m['title']} </td>";
+
+        if (isset($m['poster']))
+        {
+            echo "<td><img src=\"img/{$m['poster']}\" alt=\"Poster\" height=\"50px\" /></td>";
+        }
+        else
+        {
+            echo "<td></td>";
+        }
+        echo '</td><td>' . $m['mm'] . " " . $m['dd'] . ", " . $m['yy'] .
             '</td><td>' . $m['genre'] .
             '</td><td>' . $m['rating'] .
             '</td><td>' . $m['cmnt'] . '</td>';

@@ -2,6 +2,8 @@
 $b_title = "Viewing Activity Detail";
 require('header.php');
 
+require('auth.php');
+
 try
 {
     // initialize variables
@@ -13,6 +15,7 @@ try
     $rating = null;
     $cmnt= null;
     $ord  = null;
+    $poster = null;
 
     // was an existing id(ord column data) passed to this page? if so, select the matching record from the database
     if (!empty($_GET['ord']))
@@ -21,7 +24,7 @@ try
         $ord = $_GET['ord'];
 
         // connect
-        $db = new PDO ('mysql:host=aws.computerstudi.es;dbname=gc200389459', 'gc200389459', '-Z69zNNigW');
+        require ('db.php');
 
         // set up query
         $sql = "SELECT * FROM nf_my_view_act WHERE ord = :ord";
@@ -40,6 +43,7 @@ try
         $genre = $my_nf['genre'];
         $rating = $my_nf['rating'];
         $cmnt = $my_nf['cmnt'];
+        $poster = $my_nf['poster'];
 
         // disconnect
         $db = null;
@@ -59,9 +63,10 @@ catch (Exception $e)
 <h1>Viewing Activity Detail</h1>
 <p>You can add the same program repeatedly</p>
 
-<form action="save.php" method="post">
-    <fieldset>
-        <!-- assume that viewers can watch the same program (movie) many times -->
+<!--  enctype="multipart/form-data: add the ability to upload an image -->
+<form action="save.php" method="post" enctype="multipart/form-data">
+<fieldset>
+<!-- assume that viewers can watch the same program (movie) many times -->
         <label for="title" class="col-md-1">Title: </label>
         <input name="title" id="title" required value="<?php echo $title; ?>" />
     </fieldset>
@@ -69,7 +74,7 @@ catch (Exception $e)
         <label for="mm" class="col-md-1">Date: </label>
         <?php
         // connect
-        $db = new PDO ('mysql:host=aws.computerstudi.es;dbname=gc200389459', 'gc200389459', '-Z69zNNigW');
+        require ('db.php');
 
         // set up query
         $sql = "select mm from nf_mm order by ord";
@@ -106,7 +111,7 @@ catch (Exception $e)
         <label for="dd" class="col-md-1"></label>
         <?php
         // connect
-        $db = new PDO ('mysql:host=aws.computerstudi.es;dbname=gc200389459', 'gc200389459', '-Z69zNNigW');
+        require ('db.php');
 
         // set up query
         $sql = "select dd from nf_dd";
@@ -143,7 +148,7 @@ catch (Exception $e)
         <label for="yy" class="col-md-1"></label>
         <?php
         // connect
-        $db = new PDO ('mysql:host=aws.computerstudi.es;dbname=gc200389459', 'gc200389459', '-Z69zNNigW');
+        require ('db.php');
 
         // set up query
         $sql = "select yy from nf_yy order by ord desc";
@@ -181,7 +186,7 @@ catch (Exception $e)
         <label for="genre" class="col-md-1">Genre: </label>
         <?php
         // connect
-        $db = new PDO ('mysql:host=aws.computerstudi.es;dbname=gc200389459', 'gc200389459', '-Z69zNNigW');
+        require ('db.php');
 
         // set up query
         $sql = "select genre from nf_genre order by genre";
@@ -219,7 +224,7 @@ catch (Exception $e)
         <label for="rating" class="col-md-1">Rating: </label>
         <?php
         // connect
-        $db = new PDO ('mysql:host=aws.computerstudi.es;dbname=gc200389459', 'gc200389459', '-Z69zNNigW');
+        require ('db.php');
 
         // set up query
         $sql = "select rating from nf_rating order by ord desc";
@@ -254,11 +259,23 @@ catch (Exception $e)
     </fieldset>
 
     <fieldset>
+        <label for="poster" class="col-md-1">Poster:</label>
+        <input type="file" name="poster" id="poster" />
+    </fieldset>
+    <div class="col-md-offset-1">
+        <?php
+        if (isset($poster)) {
+            echo "<img src=\"img/$poster\" alt=\"Poster\" />";
+        }
+        ?>
+    </div>
+
+    <fieldset>
         <label for ="cmnt" class="col-md-1">Comment: </label>
         <textarea name="cmnt" id="cmnt"><?php echo $cmnt; ?></textarea>
     </fieldset>
     <button class="col-md-offset-1 btn btn-primary">Save</button>
-    <input type="hidden" name ="ord", id="ord" value=<?php echo $ord ?>" />
+    <input type="hidden" name ="ord" id="ord" value="<?php echo $ord ?>" />
 </form>
 </body>
 </html>

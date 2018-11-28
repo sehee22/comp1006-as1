@@ -12,6 +12,8 @@ $genre = $_POST ['genre'];
 $rating = $_POST ['rating'];
 $cmnt = $_POST ['cmnt'];
 $ord = $_POST['ord'];
+$poster = $_POST['poster'];
+
 
 // validate each input
 $ok = true;
@@ -85,6 +87,35 @@ if (!(checkdate($mm_num,$dd,$yy)))
     $ok = false; // do not save the data
 }
 
+// check and validate logo upload
+if (isset($_FILES['poster']['name']))
+{
+    $posterFile = $_FILES['poster'];
+
+    if ($posterFile['size'] > 0)
+    {
+        // generate unique file name
+        $poster = session_id() . "-" . $posterFile['name'];
+
+        // check file type
+        $fileType = null;
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $fileType = finfo_file($finfo, $posterFile['tmp_name']);
+
+        // allow only jpeg & png
+        if (($fileType != "image/jpeg") && ($fileType != "image/png"))
+        {
+            echo 'Please upload a valid JPG or PNG logo<br />';
+            $ok = false;
+        }
+        else
+        {
+            // save the file
+            move_uploaded_file($posterFile['tmp_name'], "img/{$poster}");
+        }
+    }
+
+}
 // connect to the database with server, username, password, dbname
 // only save if no validation errors
 if ($ok)
@@ -94,11 +125,11 @@ if ($ok)
 
     if (empty($ord))
     {
-        $sql = "INSERT INTO nf_my_view_act (title, mm, dd, yy, genre, rating, cmnt) VALUES (:title, :mm, :dd, :yy, :genre, :rating, :cmnt)";
+        $sql = "INSERT INTO nf_my_view_act (title, mm, dd, yy, genre, rating, cmnt, poster) VALUES (:title, :mm, :dd, :yy, :genre, :rating, :cmnt, :poster)";
     }
     else
     {
-        $sql = "UPDATE nf_my_view_act SET title = :title, mm = :mm, dd = :dd, yy = :yy, genre = :genre, rating = :rating, cmnt = :cmnt WHERE ord = :ord";
+        $sql = "UPDATE nf_my_view_act SET title = :title, mm = :mm, dd = :dd, yy = :yy, genre = :genre, rating = :rating, cmnt = :cmnt, poster = :poster WHERE ord = :ord";
     }
 
     $cmd = $db->prepare($sql);
@@ -109,15 +140,18 @@ if ($ok)
     $cmd->bindParam(':genre', $genre, PDO::PARAM_STR, 20);
     $cmd->bindParam(':rating', $rating, PDO::PARAM_STR, 5);
     $cmd->bindParam(':cmnt', $cmnt, PDO::PARAM_STR, 500);
+    $cmd->bindParam(':poster', $poster, PDO::PARAM_STR, 100);
 
     if (!empty($ord))
     {
         $cmd->bindParam('ord', $ord, PDO::PARAM_INT);
     }
+
     $cmd->execute();
 
     // disconnect!!! after inserting, disconnect from the database
     $db = null;
+
 
     // redirect
     header('location:list.php');
