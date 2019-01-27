@@ -14,8 +14,6 @@ Input what you watched, and give the rating/comment
 The page keeps the poster even after [EDIT->SAVE]
 </b>
 </p>
-<p>
-Visit Here: <a href="http://aws.computerstudi.es/~gc200389459/assignment1/default.php" target="_blank"> http://aws.computerstudi.es/~gc200389459/assignment1/default.php </a> 
 <br> 
 Source Page: <a href="https://github.com/sehee22/comp1006-as1" target="_blank"> https://github.com/sehee22/comp1006-as1 </a> 
 </p>
