@@ -13,7 +13,6 @@ Input what you watched, and give the rating/comment
 <br>
 The page keeps the poster even after [EDIT->SAVE]
 </b>
-</p>
 <br> 
 Source Page: <a href="https://github.com/sehee22/comp1006-as1" target="_blank"> https://github.com/sehee22/comp1006-as1 </a> 
 </p>
