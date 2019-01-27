@@ -53,7 +53,7 @@ if ($ok)
     catch (Exception $e)
     {
         // send
-        mail('200389459@student.georgianc.on.ca', 'Netflix page Error: ' . $b_title , $e);
+        mail('@', 'Netflix page Error: ' . $b_title , $e);
         // show generic error page
         header('location:error.php');
     }
